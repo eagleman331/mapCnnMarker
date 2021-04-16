@@ -1,13 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import "react-native-gesture-handler";
+
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+import TaskContextProvider from "./context/TaskContext";
+
+import ButtomNavigation from "./Navigation/ButtomNavigation";
+import DrawerNavigation from "./Navigation/DrawerNavigation";
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <SafeAreaProvider>
+
+
+      <TaskContextProvider>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={ButtomNavigation} />
+        <Drawer.Screen name="Profile" component={DrawerNavigation} />
+      </Drawer.Navigator>
+      </TaskContextProvider>
+      </SafeAreaProvider>
+     
+    </NavigationContainer>
   );
 }
 
